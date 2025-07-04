@@ -1,9 +1,9 @@
 # user/tests/test_user_api.py
 from django.contrib.auth.models import User
-from core.models import UserProfile
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
+
 
 class UserApiTests(APITestCase):
 
@@ -18,7 +18,8 @@ class UserApiTests(APITestCase):
         res = self.client.post(reverse('user:register'), payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        self.assertTrue(User.objects.filter(username=payload['username']).exists())
+        self.assertTrue(User.objects.filter(
+                username=payload['username']).exists())
 
     def test_register_user_password_too_short(self):
         """Test password must be more than 5 characters"""
@@ -30,7 +31,8 @@ class UserApiTests(APITestCase):
         res = self.client.post(reverse('user:register'), payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertFalse(User.objects.filter(username=payload['username']).exists())
+        self.assertFalse(User.objects.filter(
+                username=payload['username']).exists())
 
     def test_register_user_without_role_fails(self):
         """Test registration fails if role is not provided"""
@@ -47,7 +49,8 @@ class UserApiTests(APITestCase):
 
     def test_login_user_success(self):
         """Test that user can log in with correct credentials"""
-        user = User.objects.create_user(username='loginuser', email='login@example.com', password='testpass123')
+        user = User.objects.create_user(username='loginuser',
+            email='login@example.com', password='testpass123')
         payload = {
             'username': 'loginuser',
             'password': 'testpass123'
@@ -60,7 +63,8 @@ class UserApiTests(APITestCase):
 
     def test_login_user_invalid_credentials(self):
         """Test login fails with incorrect credentials"""
-        User.objects.create_user(username='loginuser2', email='login2@example.com', password='correctpass')
+        User.objects.create_user(username='loginuser2',
+            email='login2@example.com', password='correctpass')
         payload = {
             'username': 'loginuser2',
             'password': 'wrongpass'

@@ -3,8 +3,12 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from core.models import UserProfile
 
+
 class UserRegisterSerializer(serializers.ModelSerializer):
-    role = serializers.ChoiceField(choices=UserProfile.ROLE_CHOICES, write_only=True)
+    role = serializers.ChoiceField(
+        choices=UserProfile.ROLE_CHOICES,
+        write_only=True
+    )
 
     class Meta:
         model = User
