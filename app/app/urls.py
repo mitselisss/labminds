@@ -28,5 +28,6 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name='token_refresh'
     ),
-    path('api/user/', include('user.urls', namespace='user'))
+    path('api/user/', include('user.urls', namespace='user')),
+    path('api/survey/', include('survey.urls')),
 ]

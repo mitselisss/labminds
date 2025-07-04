@@ -3,3 +3,4 @@ djangorestframework<3.13,>=3.12.4
 djangorestframework-simplejwt
 psycopg2>=2.8.6,<2.9
 drf-spectacular
+python-dateutil
