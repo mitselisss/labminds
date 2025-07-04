@@ -49,8 +49,11 @@ class UserApiTests(APITestCase):
 
     def test_login_user_success(self):
         """Test that user can log in with correct credentials"""
-        user = User.objects.create_user(username='loginuser',
-            email='login@example.com', password='testpass123')
+        User.objects.create_user(
+            username='loginuser',
+            email='login@example.com',
+            password='testpass123'
+        )
         payload = {
             'username': 'loginuser',
             'password': 'testpass123'
@@ -63,8 +66,11 @@ class UserApiTests(APITestCase):
 
     def test_login_user_invalid_credentials(self):
         """Test login fails with incorrect credentials"""
-        User.objects.create_user(username='loginuser2',
-            email='login2@example.com', password='correctpass')
+        User.objects.create_user(
+            username='loginuser2',
+            email='login2@example.com',
+            password='correctpass'
+        )
         payload = {
             'username': 'loginuser2',
             'password': 'wrongpass'
